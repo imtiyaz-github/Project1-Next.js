@@ -1,7 +1,5 @@
 import MeetupList from "../components/meetups/MeetupList";
 
-
-
 const DUMMY_MEETUPS = [
   {
     id: "M1",
@@ -20,17 +18,40 @@ const DUMMY_MEETUPS = [
     description: "This is a second meetup!",
   },
   {
-    id:"M3",
-    title:"A Third Meetup",
-    image:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/1280px-Stadtbild_M%C3%BCnchen.jpg",
-    address:"some address 15,some city",
-    description:"This is a Third meetup!",
-  }
+    id: "M3",
+    title: "A Third Meetup",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/1280px-Stadtbild_M%C3%BCnchen.jpg",
+    address: "some address 15,some city",
+    description: "This is a Third meetup!",
+  },
 ];
 
-
-
-function HomePage() {
-  return <MeetupList meetups={DUMMY_MEETUPS} />;
+function HomePage(props) {
+  return <MeetupList meetups={props.meetups} />;
 }
+
+// export async function getServerSideProps(context){
+
+//   //fetch data from ann API
+
+// //  return {
+// //   props: {
+// //     meetups:DUMMY_MEETUPS
+// //   }
+// //  }
+
+// }
+
+export async function getStaticProps() {
+  //fetch data from an API
+
+  return {
+    props: {
+      meetups: DUMMY_MEETUPS,
+    },
+    revalidate: 1,
+  };
+}
+
 export default HomePage;
